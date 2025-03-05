@@ -14,7 +14,7 @@ Both components demonstrate how to use Stream's Video SDK to create video calls 
 
 ## Prerequisites
 
-- Node.js 14 or later
+- Node.js 22 or later
 - Stream account with API key and secret
 - OpenAI API key with access to the Realtime API
 
