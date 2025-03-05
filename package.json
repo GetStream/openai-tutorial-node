@@ -1,0 +1,16 @@
+{
+  "name": "@stream-io/video-ai-demo-server",
+  "type": "module",
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "@stream-io/node-sdk": "^0.4.14",
+    "@stream-io/openai-realtime-api": "^0.1.0",
+    "dotenv": "^16.3.1",
+    "hono": "^4.7.4",
+    "open": "^10.1.0"
+  },
+  "scripts": {
+    "server": "node ./server.mjs",
+    "standalone-ui": "node ./standalone.mjs"
+  }
+}
