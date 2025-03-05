@@ -1,71 +1,116 @@
 # Stream Video AI Demo Server
 
-This repository contains a demo server for Stream's Video AI integration.
+A demo Node.js server for integrating Stream's Video SDK with OpenAI's Realtime API. This project showcases how to build AI-powered video applications with voice interactions.
 
-## Requirements
+## What This Repository Does
 
-- Node.js 14 or later (required by the Stream SDK)
+This repository provides two main components:
 
-> **Important**: The Stream SDK uses modern JavaScript features that require Node.js 14 or later. If you're using an older version of Node.js, you'll need to upgrade.
+1. **Standalone UI**: A simple script that launches a browser-based video call with an AI assistant powered by OpenAI's Realtime API.
 
-## Installation
+2. **Server API**: A Hono-based HTTP server that provides endpoints for creating and managing AI-powered video calls.
 
-```bash
-npm install
-```
+Both components demonstrate how to use Stream's Video SDK to create video calls and connect them with OpenAI's Realtime API for AI-powered voice interactions.
 
-## Configuration
+## Prerequisites
 
-Create a `.env` file in the project root with the following variables:
+- Node.js 14 or later
+- Stream account with API key and secret
+- OpenAI API key with access to the Realtime API
 
-```
-# Stream API credentials
-STREAM_API_KEY=your_stream_api_key
-STREAM_API_SECRET=your_stream_api_secret
+## Getting Started
 
-# OpenAI API key
-OPENAI_API_KEY=your_openai_api_key
-```
+### Installation
 
-You can copy the `.env.example` file as a starting point:
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/stream-video-ai-demo-server.git
+   cd stream-video-ai-demo-server
+   ```
 
-```bash
-cp .env.example .env
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Then edit the `.env` file with your actual API keys.
+3. Create a `.env` file with your API keys:
+   ```
+   STREAM_API_KEY=your_stream_api_key
+   STREAM_API_SECRET=your_stream_api_secret
+   OPENAI_API_KEY=your_openai_api_key
+   ```
 
-## Usage
+   You can copy the example file as a starting point:
+   ```bash
+   cp .env.example .env
+   ```
 
-### Running the Server
+## Running the Standalone UI
 
-```bash
-npm start
-```
-
-### Development Mode
-
-```bash
-npm run dev
-```
-
-### Standalone UI
-
-The standalone UI allows you to quickly start a video call with an AI assistant:
+The standalone UI provides a quick way to test the AI-powered video call experience:
 
 ```bash
 npm run standalone-ui
 ```
 
-If you're using nvm and need to use a specific Node.js version:
+This will:
+1. Create a new video call with a unique ID
+2. Connect an OpenAI AI assistant to the call
+3. Open your default browser with a URL to join the call
+4. Log all events from the OpenAI Realtime API to the console
+
+You can speak to the AI assistant through your microphone, and it will respond with voice and can perform actions based on your requests.
+
+## Running the Server
+
+The server provides API endpoints for creating and managing AI-powered video calls:
 
 ```bash
-nvm use 22 && npm run standalone-ui
+npm run server
 ```
 
-This will:
-1. Open a browser window with a video call interface where you can interact with the AI assistant
-2. Log all events from the OpenAI realtime client to the console
-3. Keep the process running until you press Ctrl+C
+This starts an HTTP server on port 3000 (by default).
 
-The console output will show all events happening during the call, which is useful for debugging and understanding the interaction flow. 
+### Server Endpoints
+
+#### GET /credentials
+
+Creates a new video call and returns the necessary credentials to join it.
+
+**Response:**
+```json
+{
+  "apiKey": "your_stream_api_key",
+  "token": "user_token_for_authentication",
+  "cid": "default:call_id"
+}
+```
+
+Use these credentials in your frontend application to connect to the video call.
+
+#### POST /:id/connect
+
+Connects an OpenAI AI assistant to an existing video call.
+
+**URL Parameters:**
+- `id`: The ID of the call to connect to
+
+**Response:**
+```json
+{
+  "ok": true
+}
+```
+
+After calling this endpoint, the AI assistant will join the specified call and be ready to interact with users.
+
+### Example Usage
+
+1. Call the `/credentials` endpoint to create a new call and get connection details
+2. Use the Stream Video SDK in your frontend to join the call with the provided credentials
+3. Call the `/:id/connect` endpoint with the call ID to connect the AI assistant
+4. Interact with the AI assistant through voice in the video call
+
+## License
+
+This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details. 

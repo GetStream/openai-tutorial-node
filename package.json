@@ -1,6 +1,7 @@
 {
   "name": "@stream-io/video-ai-demo-server",
   "type": "module",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "@hono/node-server": "^1.13.8",
     "@stream-io/node-sdk": "^0.4.14",
