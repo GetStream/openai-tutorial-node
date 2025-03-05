@@ -26,35 +26,43 @@ const streamClient = new StreamClient(streamApiKey, streamApiSecret);
  * Creates a unique call ID, generates a token, and returns necessary connection details.
  */
 app.get("/credentials", (c) => {
-  const callId = crypto.randomUUID();
-  const call = streamClient.video.call("default", callId);
+    console.log("got a request for credentials");
+  // Generate a shorter UUID for callId (first 12 chars)
+  const callId = crypto.randomUUID().replace(/-/g, '').substring(0, 12);
+  // Generate a shorter UUID for userId (first 8 chars with prefix)
+  const userId = `user-${crypto.randomUUID().replace(/-/g, '').substring(0, 8)}`;
+  const callType = "default";
   const token = streamClient.generateUserToken({
-    user_id: `openai-demo-${callId}`,
+    user_id: userId,
   });
   return c.json({
     apiKey: streamApiKey,
     token,
-    cid: call.cid,
+    callType,
+    callId,
+    userId
   });
 });
 
 /**
  * Endpoint to connect an AI agent to an existing video call.
- * Takes a call ID parameter, connects the OpenAI agent to the call,
+ * Takes call type and ID parameters, connects the OpenAI agent to the call,
  * sets up the realtime client with event handlers and tools,
  * and returns a success response when complete.
  */
-app.post("/:id/connect", async (c) => {
-  const id = c.req.param("id");
+app.post("/:callType/:callId/connect", async (c) => {
+  console.log("got a request for connect");
+  const callType = c.req.param("callType");
+  const callId = c.req.param("callId");
 
-  const call = streamClient.video.call("default", id);
+  const call = streamClient.video.call(callType, callId);
   const realtimeClient = await streamClient.video.connectOpenAi({
     call,
     openAiApiKey,
     agentUserId: "lucy",
   });
   await setupRealtimeClient(realtimeClient);
-
+  console.log("agent is connected now");
   return c.json({ ok: true });
 });
 

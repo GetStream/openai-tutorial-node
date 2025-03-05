@@ -81,19 +81,22 @@ Creates a new video call and returns the necessary credentials to join it.
 ```json
 {
   "apiKey": "your_stream_api_key",
-  "token": "user_token_for_authentication",
-  "cid": "default:call_id"
+  "token": "user_authentication_token",
+  "callType": "default",
+  "callId": "unique_call_id",
+  "userId": "user_id"
 }
 ```
 
 Use these credentials in your frontend application to connect to the video call.
 
-#### POST /:id/connect
+#### POST /:callType/:callId/connect
 
 Connects an OpenAI AI assistant to an existing video call.
 
 **URL Parameters:**
-- `id`: The ID of the call to connect to
+- `callType`: The type of call (e.g., "default")
+- `callId`: The unique ID of the call to connect to
 
 **Response:**
 ```json
@@ -108,7 +111,7 @@ After calling this endpoint, the AI assistant will join the specified call and b
 
 1. Call the `/credentials` endpoint to create a new call and get connection details
 2. Use the Stream Video SDK in your frontend to join the call with the provided credentials
-3. Call the `/:id/connect` endpoint with the call ID to connect the AI assistant
+3. Call the `/:callType/:callId/connect` endpoint with the call type and ID to connect the AI assistant
 4. Interact with the AI assistant through voice in the video call
 
 ## License
