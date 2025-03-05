@@ -26,7 +26,7 @@ const streamClient = new StreamClient(streamApiKey, streamApiSecret);
  * Creates a unique call ID, generates a token, and returns necessary connection details.
  */
 app.get("/credentials", (c) => {
-    console.log("got a request for credentials");
+  console.log("got a request for credentials");
   // Generate a shorter UUID for callId (first 12 chars)
   const callId = crypto.randomUUID().replace(/-/g, '').substring(0, 12);
   // Generate a shorter UUID for userId (first 8 chars with prefix)
