@@ -1,10 +1,13 @@
 {
-  "name": "@stream-io/video-ai-demo-server",
+  "name": "@stream-io/openai-tutorial-node",
   "type": "module",
   "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
-    "@stream-io/node-sdk": "^0.4.14",
+    "@stream-io/node-sdk": "^0.4.17",
     "@stream-io/openai-realtime-api": "^0.1.0",
     "dotenv": "^16.3.1",
     "hono": "^4.7.4",
