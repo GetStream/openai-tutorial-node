@@ -1,6 +1,7 @@
 import { serve } from "@hono/node-server";
 import { StreamClient } from "@stream-io/node-sdk";
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import crypto from 'crypto';
 import { config } from 'dotenv';
 
@@ -19,6 +20,7 @@ if (!streamApiKey || !streamApiSecret || !openAiApiKey) {
 }
 
 const app = new Hono();
+app.use(cors());
 const streamClient = new StreamClient(streamApiKey, streamApiSecret);
 
 /**
@@ -108,7 +110,7 @@ async function setupRealtimeClient(realtimeClient) {
           humidity: 65,
           windSpeed: 10
         };
-        
+
         return weatherData;
       } catch (error) {
         console.error("Error fetching weather data:", error);
