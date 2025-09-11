@@ -6,12 +6,12 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@hono/node-server": "^1.13.8",
-    "@stream-io/node-sdk": "^0.4.17",
-    "@stream-io/openai-realtime-api": "^0.1.0",
-    "dotenv": "^16.3.1",
-    "hono": "^4.7.4",
-    "open": "^10.1.0"
+    "@hono/node-server": "^1.19.2",
+    "@stream-io/node-sdk": "^0.6.6",
+    "@stream-io/openai-realtime-api": "^0.3.3",
+    "dotenv": "^17.2.2",
+    "hono": "^4.9.6",
+    "open": "^10.2.0"
   },
   "scripts": {
     "server": "node ./server.mjs",
