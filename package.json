@@ -10,7 +10,7 @@
     "@stream-io/node-sdk": "^0.6.6",
     "@stream-io/openai-realtime-api": "^0.3.3",
     "dotenv": "^17.2.2",
-    "hono": "^4.9.6",
+    "hono": "^4.12.26",
     "open": "^10.2.0"
   },
   "scripts": {
