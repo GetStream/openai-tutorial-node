@@ -31,7 +31,7 @@ async function main() {
   // Set up event handling, all events from openai realtime api are available here see: https://platform.openai.com/docs/api-reference/realtime-server-events
   realtimeClient.on('realtime.event', ({time, source, event}) => {
     console.log(`got an event from OpenAI ${event.type}`);
-    if (event.type === 'response.audio_transcript.done') {
+    if (event.type === 'response.output_audio_transcript.done') {
       console.log(`got a transcript from OpenAI ${event.transcript}`);
     }
   });
